@@ -1,4 +1,4 @@
-# Trabajo IntegradorModulo Programador
+# Trabajo Integrador - Modulo Programador
 
 ## Integrantes:
 :large_blue_circle: Palacios, Alfredo Sebastian
