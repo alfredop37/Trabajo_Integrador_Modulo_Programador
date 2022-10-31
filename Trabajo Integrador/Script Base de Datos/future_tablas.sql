@@ -58,6 +58,18 @@ CREATE TABLE IF NOT EXISTS `operatoriacomercial` (
   PRIMARY KEY (`Id_OperatoriaComercial`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+
+--
+-- Volcado de datos para la tabla `operatoriacomercial`
+--
+
+INSERT INTO `operatoriacomercial` ( `Nombre_OperatoriaComercial`) VALUES
+('Sin_Operatoria'),
+( 'Vendida'),
+( 'Alquilada'),
+( 'Prestada'),
+( 'Cedida');
+
 -- --------------------------------------------------------
 
 --
