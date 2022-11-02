@@ -112,51 +112,14 @@ def ejecutarOpcion(opcion):
             print("Ocurrió un error...{0}".format(ex))
 
     elif opcion == 5:
-        try:
-            propiedad = dao.listarPropiedadesDPV()
-            if len(propiedad) > 0:
-                funciones.listarPropiedades(propiedad)
-            else:
-                print("No se encontraron PROPIEDADES...")  
-                time.sleep(3)         
-        except error as ex:
-            print("Ocurrió un error...{0}".format(ex))
+      
     elif opcion == 6:
-        try:
-            propiedad = dao.listarPropiedadesDPA()
-            if len(propiedad) > 0:
-                funciones.listarPropiedades(propiedad)
-                time.sleep(3)
-            else:
-                print("No se encontraron PROPIEDADES...")   
-                time.sleep(3)        
-        except error as ex:
-            print("Ocurrió un error...{0}".format(ex))
+       
     elif opcion == 7:
-        try:
-            propiedad = dao.listarPropiedadesVendidas()
-            if len(propiedad) > 0:
-                funciones.listarPropiedades(propiedad)
-                time.sleep(3)
-            else:
-                print("No se encontraron PROPIEDADES...") 
-                time.sleep(3)          
-        except error as ex:
-            print("Ocurrió un error...{0}".format(ex))    
+         
  
     elif opcion == 8:
-        try:
-            propiedad = dao.listarPropiedadesAlquiladas()
-            if len(propiedad) > 0:
-                funciones.listarPropiedades(propiedad)
-                time.sleep(3)
-            else:
-                print("No se encontraron PROPIEDADES...")   
-                time.sleep(3)        
-        except error as ex:
-            print("Ocurrió un error...{0}".format(ex))
-    else:
-        print ("Opcion no valida...")
+      
 
 
 # def cargarDatosPropiedad():
