@@ -33,53 +33,9 @@ class DAO():
         else:
             print("error")
 
-    def listarPropiedadesDPV(self):
-        if self.connection.is_connected():
-            try:
-                query=self.connection.cursor()
-                query.execute("SELECT * FROM propiedad WHERE Id_Estado =1 AND Id_OperatoriaComercial = 1 ORDER BY Nombre ASC")
-                result= query.fetchall()                
-                return result
-            except Error as ex:
-                print("Error al intentar la conexion: {0}".format(ex))        
-        else:
-            print("error")
-            
-    def listarPropiedadesDPA(self):
-        if self.connection.is_connected():
-            try:
-                query=self.connection.cursor()
-                query.execute("SELECT * FROM propiedad WHERE Id_Estado = 2 AND Id_OperatoriaComercial = 1 ORDER BY Nombre ASC")
-                result= query.fetchall()                
-                return result
-            except Error as ex:
-                print("Error al intentar la conexion: {0}".format(ex))        
-        else:
-            print("error")      
+ 
     
-    def listarPropiedadesVendidas(self):
-        if self.connection.is_connected():
-            try:
-                query=self.connection.cursor()
-                query.execute("SELECT * FROM propiedad WHERE  Id_OperatoriaComercial = 2 ORDER BY Nombre ASC")
-                result= query.fetchall()                
-                return result
-            except Error as ex:
-                print("Error al intentar la conexion: {0}".format(ex))        
-        else:
-            print("error")  
-            
-    def listarPropiedadesAlquiladas(self):
-        if self.connection.is_connected():
-            try:
-                query=self.connection.cursor()
-                query.execute("SELECT * FROM propiedad WHERE  Id_OperatoriaComercial = 3 ORDER BY Nombre ASC")
-                result= query.fetchall()                
-                return result
-            except Error as ex:
-                print("Error al intentar la conexion: {0}".format(ex))        
-        else:
-            print("error")                   
+                
     
     def listarTipo(self):
         if self.connection.is_connected():
