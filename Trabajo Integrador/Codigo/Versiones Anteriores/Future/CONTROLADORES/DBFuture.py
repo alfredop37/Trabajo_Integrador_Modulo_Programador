@@ -15,7 +15,7 @@ class DAO():
                 host='localhost',
                 port=3306,
                 user='root',
-                password='ISPCProgramador',  #'',
+                password='',  #'',
                 db='future'
             )            
         except Error as ex:
@@ -25,13 +25,15 @@ class DAO():
         if self.connection.is_connected():
             try:
                 query=self.connection.cursor()
-                query.execute("SELECT propiedad.*, propietario.Nombre, estado.Nombre_Estado, tipo.Nombre_Tipo, operatoriacomercial.Nombre_OperatoriaComercial from propiedad INNER JOIN propietario on propietario.Id_Propietario = propiedad.Id_Propietario INNER JOIN estado on estado.Id_Estado = propiedad.Id_Estado INNER JOIN tipo on tipo.Id_Tipo = propiedad.Id_Tipo INNER JOIN operatoriacomercial on operatoriacomercial.Id_OperatoriaComercial = propiedad.Id_OperatoriaComercial")
+                query.execute("SELECT * FROM propiedad ORDER BY Nombre ASC")
                 result= query.fetchall()                
                 return result
             except Error as ex:
                 print("Error al intentar la conexion: {0}".format(ex))        
         else:
             print("error")
+
+ 
     
                 
     
@@ -113,39 +115,12 @@ class DAO():
                 sql = "DELETE FROM propiedad WHERE Id_Propiedad = '{0}'"
                 cursor.execute(sql.format(Id_Propiedad))
                 self.connection.commit()
+                print("CARGANDO...\n")
             except Error as ex:
-                print("Error al intentar la conexión: {0}".format(ex))     
+                print("Error al intentar la conexión: {0}".format(ex))            
 
-    def listarPropiedadesDPV(self):
-        if self.connection.is_connected():
-            try:
-                query=self.connection.cursor()
-                sql = "SELECT propiedad.*, propietario.Nombre, estado.Nombre_Estado, tipo.Nombre_Tipo, operatoriacomercial.Nombre_OperatoriaComercial "
-                sql = sql + " from propiedad INNER JOIN propietario on propietario.Id_Propietario = propiedad.Id_Propietario INNER JOIN estado on estado.Id_Estado = propiedad.Id_Estado "
-                sql = sql + " INNER JOIN tipo on tipo.Id_Tipo = propiedad.Id_Tipo INNER JOIN operatoriacomercial on operatoriacomercial.Id_OperatoriaComercial = propiedad.Id_OperatoriaComercial "
-                sql = sql + " WHERE estado.Nombre_Estado like 'Venta' and operatoriacomercial.Nombre_OperatoriaComercial LIKE 'Pendiente' "
-                sql = sql + " ORDER BY  propiedad.Nombre ASC"
-                query.execute(sql)
-                result= query.fetchall()                
-                return result
-            except Error as ex:
-                print("Error al intentar la conexion: {0}".format(ex))        
-        else:
-            print("error")
 
-    def listarPropiedadesDPA(self):
-        if self.connection.is_connected():
-            try:
-                query=self.connection.cursor()
-                sql = "SELECT propiedad.*, propietario.Nombre, estado.Nombre_Estado, tipo.Nombre_Tipo, operatoriacomercial.Nombre_OperatoriaComercial "
-                sql = sql + " from propiedad INNER JOIN propietario on propietario.Id_Propietario = propiedad.Id_Propietario INNER JOIN estado on estado.Id_Estado = propiedad.Id_Estado "
-                sql = sql + " INNER JOIN tipo on tipo.Id_Tipo = propiedad.Id_Tipo INNER JOIN operatoriacomercial on operatoriacomercial.Id_OperatoriaComercial = propiedad.Id_OperatoriaComercial "
-                sql = sql + " WHERE estado.Nombre_Estado like 'Alquiler' and operatoriacomercial.Nombre_OperatoriaComercial LIKE 'Pendiente' "
-                sql = sql + " ORDER BY  propiedad.Nombre ASC"
-                query.execute(sql)
-                result= query.fetchall()                
-                return result
-            except Error as ex:
-                print("Error al intentar la conexion: {0}".format(ex))        
-        else:
-            print("error")
+        
+
+
+
