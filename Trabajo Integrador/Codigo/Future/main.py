@@ -9,6 +9,7 @@ import time
 
 
 def menuPrincipal(): 
+    system("cls")
     continuar = True
     while(continuar):
         opcionCorrecta = False
@@ -89,7 +90,7 @@ def ejecutarOpcion(opcion):
                 print("===========================")
                 Id_Propiedad = funciones.pedirDatosEliminacion(prop)
 
-                if ( not Id_Propiedad is None):
+                if ( Id_Propiedad !=0):
                     dao.eliminarPropiedad(Id_Propiedad)
                     print("Propiedad Eliminada con exito...")
                     time.sleep(3)
@@ -147,11 +148,32 @@ def ejecutarOpcion(opcion):
         except error as ex:
             print("Ocurrió un error...{0}".format(ex))
     elif opcion == 7:
-        print("opcion 7")
+        try:
+            propiedad = dao.listarPropiedadesVEN()
+            if not propiedad is None:
+                print("\nPropiedades Vendidas")
+                print("====================\n")
+                funciones.listarPropiedades(propiedad)
+                pausa = input("\nPresione una tecla p/Finalizar: ")
+            else:
+                print("\nNo se encontraron PROPIEDADES vendidas\n ")  
+                time.sleep(3)         
+        except error as ex:
+            print("Ocurrió un error...{0}".format(ex))
     elif opcion == 8:
-        print("opcion 8")
+        try:
+            propiedad = dao.listarPropiedadesALQ()
+            if not propiedad is None:
+                print("\nPropiedades Alquiladas")
+                print("======================\n")
+                funciones.listarPropiedades(propiedad)
+                pausa = input("\nPresione una tecla p/Finalizar: ")
+            else:
+                print("\nNo se encontraron PROPIEDADES vendidas\n ")  
+                time.sleep(3)         
+        except error as ex:
+            print("Ocurrió un error...{0}".format(ex))
       
-
 
 # def cargarDatosPropiedad():
 #        print("Elija un tipo de propiedad")       

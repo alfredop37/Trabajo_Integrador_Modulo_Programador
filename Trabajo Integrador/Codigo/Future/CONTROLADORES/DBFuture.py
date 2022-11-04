@@ -116,8 +116,9 @@ class DAO():
                 cursor.execute(sql.format(Id_Propiedad))
                 self.connection.commit()
             except Error as ex:
-                print("Error al intentar la conexión: {0}\n".format(ex))     
+                print("Error al intentar la conexión: {0}\n".format(ex))  
 
+    # Metodo para buscar todoas las propiedades que estan a la Venta
     def listarPropiedadesDPV(self):
         if self.connection.is_connected():
             try:
@@ -135,6 +136,7 @@ class DAO():
         else:
             print("error")
 
+    # Metodo para buscar todoas las propiedades que estan en Alquiler
     def listarPropiedadesDPA(self):
         if self.connection.is_connected():
             try:
@@ -143,6 +145,44 @@ class DAO():
                 sql = sql + " from propiedad INNER JOIN propietario on propietario.Id_Propietario = propiedad.Id_Propietario INNER JOIN estado on estado.Id_Estado = propiedad.Id_Estado "
                 sql = sql + " INNER JOIN tipo on tipo.Id_Tipo = propiedad.Id_Tipo INNER JOIN operatoriacomercial on operatoriacomercial.Id_OperatoriaComercial = propiedad.Id_OperatoriaComercial "
                 sql = sql + " WHERE estado.Nombre_Estado like 'Alquiler' and operatoriacomercial.Nombre_OperatoriaComercial LIKE 'Pendiente' "
+                sql = sql + " ORDER BY  propiedad.Nombre ASC"
+                query.execute(sql)
+                result= query.fetchall()                
+                return result
+            except Error as ex:
+                print("Error al intentar la conexion: {0}".format(ex))        
+        else:
+            print("error")
+
+    # Metodo que permite buscar en la base todaas las propiedades que estando en estado de Venta
+    # fueron vendidas
+    def listarPropiedadesVEN(self):
+        if self.connection.is_connected():
+            try:
+                query=self.connection.cursor()
+                sql = "SELECT propiedad.*, propietario.Nombre, estado.Nombre_Estado, tipo.Nombre_Tipo, operatoriacomercial.Nombre_OperatoriaComercial "
+                sql = sql + " from propiedad INNER JOIN propietario on propietario.Id_Propietario = propiedad.Id_Propietario INNER JOIN estado on estado.Id_Estado = propiedad.Id_Estado "
+                sql = sql + " INNER JOIN tipo on tipo.Id_Tipo = propiedad.Id_Tipo INNER JOIN operatoriacomercial on operatoriacomercial.Id_OperatoriaComercial = propiedad.Id_OperatoriaComercial "
+                sql = sql + " WHERE estado.Nombre_Estado like 'Venta' and operatoriacomercial.Nombre_OperatoriaComercial LIKE 'Vendida' "
+                sql = sql + " ORDER BY  propiedad.Nombre ASC"
+                query.execute(sql)
+                result= query.fetchall()                
+                return result
+            except Error as ex:
+                print("Error al intentar la conexion: {0}".format(ex))        
+        else:
+            print("error")
+
+    # Metodo que permite buscar en la base todas las propiedades que estando en estado de Alquiler
+    # se encuentra alquiladas.
+    def listarPropiedadesALQ(self):
+        if self.connection.is_connected():
+            try:
+                query=self.connection.cursor()
+                sql = "SELECT propiedad.*, propietario.Nombre, estado.Nombre_Estado, tipo.Nombre_Tipo, operatoriacomercial.Nombre_OperatoriaComercial "
+                sql = sql + " from propiedad INNER JOIN propietario on propietario.Id_Propietario = propiedad.Id_Propietario INNER JOIN estado on estado.Id_Estado = propiedad.Id_Estado "
+                sql = sql + " INNER JOIN tipo on tipo.Id_Tipo = propiedad.Id_Tipo INNER JOIN operatoriacomercial on operatoriacomercial.Id_OperatoriaComercial = propiedad.Id_OperatoriaComercial "
+                sql = sql + " WHERE estado.Nombre_Estado like 'Alquiler' and operatoriacomercial.Nombre_OperatoriaComercial LIKE 'Alquilada' "
                 sql = sql + " ORDER BY  propiedad.Nombre ASC"
                 query.execute(sql)
                 result= query.fetchall()                
