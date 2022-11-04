@@ -17,8 +17,7 @@ def menuPrincipal():
             print ("*                       - Inmobiliaria - Future -                     *")
             print ("***********************************************************************")
             print ("*                    Sistema de Gestión Inmobiliaria                  *")
-            print ("***********************************************************************")
-            print ("")                                                                    
+            print ("***********************************************************************\n")                                                                 
             print ("- 1. Ingresar una nueva propiedad ")                                    
             print ("- 2. Modificar datos de propiedad ")                          
             print ("- 3. Eliminar datos de propiedad ")                      
@@ -26,10 +25,8 @@ def menuPrincipal():
             print ("- 5. Listar propiedades disponibles para la Venta  ")                      
             print ("- 6. Listar propiedades disponibles para Alquiler   ")                 
             print ("- 7. Listar propiedades vendidas  ")                    
-            print ("- 8. Listar propiedades alquiladas ")                   
-            print (" ")                                                                    
-            print ("- 0. Salir  ")                                                           
-            print (" ")                                                                 
+            print ("- 8. Listar propiedades alquiladas \n")                                                                                      
+            print ("- 0. Salir  \n")                                                                                                                          
             print ("***********************************************************************")
             
             try:
@@ -72,11 +69,10 @@ def ejecutarOpcion(opcion):
                 print("\n Modificar datos de propiedad")
                 print("============================")
                 propi = funciones.modificarPropiedad(prop)
-                if propi:
+                if not propi is None:
                     dao.modificarPropiedad(propi)
-                    print("Propiedad Modificada con exito...")
+                    print("Propiedad Modificada con exito...\n")
                     time.sleep(3)
-                    print("")
                     menuPrincipal()
                 else:
                     print("Propiedad a modificar no encontrada...\n")
@@ -92,7 +88,7 @@ def ejecutarOpcion(opcion):
                 print("\nEliminar datos de propiedad")
                 print("===========================")
                 Id_Propiedad = funciones.pedirDatosEliminacion(prop)
-                print(Id_Propiedad)
+
                 if ( not Id_Propiedad is None):
                     dao.eliminarPropiedad(Id_Propiedad)
                     print("Propiedad Eliminada con exito...")

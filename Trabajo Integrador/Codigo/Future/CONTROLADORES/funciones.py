@@ -74,15 +74,18 @@ def pedirDatosRegistro():
         idTipo = input("Seleccione un tipo de propiedad [0 P/Salir] : ")
         try:
             idTipo = int(idTipo)
-            if(idTipo > len(tipo)):
-                continua = input('\nTipo Ingresado Incorrecto... Presione una tecla p/continuar...')
-                continue
-            elif idTipo == 0:
+            if idTipo == 0:
                 continuar = False
-                print(continuar)
                 break
             else:
-                tipoCorrecto = True
+                for tip in tipo:
+                    if tip[0] == idTipo:
+                        tipoCorrecto = True
+                        break
+
+            if(tipoCorrecto == False):
+                continua = input('\nTipo Ingresado Incorrecto... Presione una tecla p/continuar...')
+                continue
                 
         except ValueError:
             continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...')
@@ -91,6 +94,7 @@ def pedirDatosRegistro():
     if (continuar):      
 
         estadossCorrecto = False
+        conDatos = False
         while(not estadossCorrecto):
             estado = dao.listarEstado()
 
@@ -98,7 +102,12 @@ def pedirDatosRegistro():
             idestado = input("Seleccione un estado de propiedad: ")  
             try:
                 idestado = int(idestado)
-                if(idestado<1 or idestado > len(estado)):
+                for est in estado:
+                    if est[0]==idestado:
+                        conDatos = True
+                        break
+
+                if(conDatos==False):
                     continua = input('\nEstado Ingresado Incorrecto... Presione una tecla p/continuar...\n')
                     continue
                 else:
@@ -108,6 +117,7 @@ def pedirDatosRegistro():
                 continue    
 
         operatoriaCorrecto = False
+        conDatos = False
         while(not operatoriaCorrecto):
             operatoria = dao.listarOperatoriaComercial()
 
@@ -115,7 +125,12 @@ def pedirDatosRegistro():
             idoperatoria = input("Seleccione una Operatoria Comercial de propiedad: ")
             try:
                 idoperatoria = int(idoperatoria)
-                if(idoperatoria<1 or idoperatoria > len(operatoria)):
+                for ope in operatoria:
+                    if ope[0]==idoperatoria:
+                        conDatos = True
+                        break
+                
+                if (conDatos==False):
                     continua = input('\nOperatoria Ingresada Incorrecta... Presione una tecla p/continuar...\n')
                     continue
                 else:
@@ -132,7 +147,12 @@ def pedirDatosRegistro():
             idpropietario = input("Seleccione un propietario de propiedad: ")   
             try:
                 idpropietario = int(idpropietario)
-                if(idpropietario<1 or idpropietario > len(propietario)):
+                for prop in propietario:
+                    if prop[0]==idpropietario:
+                        conDatos = True
+                        break
+
+                if (conDatos==False):
                     continua = input('\nPropietario Ingresado Incorrecto... Presione una tecla p/continuar...\n')
                     continue
                 else:
@@ -166,12 +186,15 @@ def pedirDatosRegistro():
                 continua = input("Debe ingresar un contacto para la propiedad.")
                 continue
             else:
-                contactoCorrecto = True               
+                contactoCorrecto = True                
 
+        propiedad = None
+        confirma = str(input('\n Confirma los datos ingresados S/N : '))
+        confirma = confirma.upper()
+        if (confirma == 'S'):
+            propiedad = (idTipo,idestado,idoperatoria,idpropietario,nombre,direccion,contacto)
 
-        propiedad = (idTipo,idestado,idoperatoria,idpropietario,nombre,direccion,contacto)
-
-        return propiedad     
+        return propiedad  
 
 # Metodo para armar modificacion en tabla propiedades
 def modificarPropiedad(propiedades):
@@ -225,22 +248,30 @@ def modificarPropiedad(propiedades):
                         contactoCorrecto = True               
             
                 tipoCorrecto = False
+                conDatos = False
                 while(not tipoCorrecto):
                     tipo = dao.listarTipo()
                     listarTiposPropiedades(tipo)
                     idTipo = input("Seleccione un tipo de propiedad: ")
                     try:
                         idTipo = int(idTipo)
-                        if(idTipo<1 or idTipo > len(tipo)):
-                            continua = input('\nTipo Ingresado Incorrecto... Presione una tecla p/continuar...\n')
+                        for tip in tipo:
+                            if tip[0] == idTipo:
+                                conDatos = True
+                                break
+
+                        if(conDatos == False):
+                            continua = input('\nTipo Ingresado Incorrecto... Presione una tecla p/continuar...')
                             continue
                         else:
                             tipoCorrecto = True
+                            
                     except ValueError:
-                        continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
+                        continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...')
                         continue   
-                
+
                 estadossCorrecto = False
+                conDatos = False
                 while(not estadossCorrecto):
                     estado = dao.listarEstado()
 
@@ -248,16 +279,22 @@ def modificarPropiedad(propiedades):
                     idestado = input("Seleccione un estado de propiedad: ")  
                     try:
                         idestado = int(idestado)
-                        if(idestado<1 or idestado > len(estado)):
+                        for est in estado:
+                            if est[0]==idestado:
+                                conDatos = True
+                                break
+
+                        if(conDatos==False):
                             continua = input('\nEstado Ingresado Incorrecto... Presione una tecla p/continuar...\n')
                             continue
                         else:
                             estadossCorrecto = True
                     except ValueError:
                         continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
-                        continue    
+                        continue     
 
                 operatoriaCorrecto = False
+                conDatos = False
                 while(not operatoriaCorrecto):
                     operatoria = dao.listarOperatoriaComercial()
 
@@ -265,7 +302,12 @@ def modificarPropiedad(propiedades):
                     idoperatoria = input("Seleccione una OperatoriaComercial de propiedad: ")
                     try:
                         idoperatoria = int(idoperatoria)
-                        if(idoperatoria<1 or idoperatoria > len(operatoria)):
+                        for ope in operatoria:
+                            if ope[0]==idoperatoria:
+                                conDatos = True
+                                break
+                        
+                        if (conDatos==False):
                             continua = input('\nOperatoria Ingresada Incorrecta... Presione una tecla p/continuar...\n')
                             continue
                         else:
@@ -275,6 +317,7 @@ def modificarPropiedad(propiedades):
                         continue          
 
                 propietariosCorrecto = False
+                conDatos = False
                 while(not propietariosCorrecto):
                     propietario = dao.listarPropietario()
 
@@ -282,19 +325,24 @@ def modificarPropiedad(propiedades):
                     idpropietario = input("Seleccione un propietario de propiedad: ")   
                     try:
                         idpropietario = int(idpropietario)
-                        if(idpropietario<1 or idpropietario > len(propietario)):
+                        for prop in propietario:
+                            if prop[0]==idpropietario:
+                                conDatos = True
+                                break
+
+                        if (conDatos==False):
                             continua = input('\nPropietario Ingresado Incorrecto... Presione una tecla p/continuar...\n')
                             continue
                         else:
                             propietariosCorrecto = True
                     except ValueError:
                         continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
-                        continue      
+                        continue       
                 
                 propiedad = None
                 confirma = str(input('\n Confirma los datos modificados S/N : '))
-                if (confirma == 'S'):
-                    propiedad = (nombre, direccion, contacto, IdpropEditar, idTipo)
+                if (confirma == 'S' or confirma == 's'):
+                    propiedad = (idTipo, idestado, idoperatoria, idpropietario, nombre, direccion, contacto, IdpropEditar)
 
                 return propiedad
 
@@ -325,12 +373,14 @@ def pedirDatosEliminacion(propiedades):
                 cadena = "|{:>4}|{:<30}|{:<30}|{:<30}|{:<20}|{:<12}|{:<15}|{:<15}|".format(prop[0], prop[5], prop[6], prop[7], prop[8], prop[9], prop[10], prop[11])
                 print(cadena)          
                 print("")              
+                
+                
                 continua = str(input("\nConfirmar la eliminacion de la propiedad S/N ? : "))
-                if continua =="S":   
+                if (continua =="S" or continua == "s"):   
                     return IdpropEditar
                 else:
                     IdpropEditar = None
-                    return IdpropEditar 
+
     except ValueError:
         continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
         
