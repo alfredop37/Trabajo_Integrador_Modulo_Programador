@@ -25,7 +25,7 @@ class DAO():
         if self.connection.is_connected():
             try:
                 query=self.connection.cursor()
-                query.execute("SELECT propiedad.*, propietario.Nombre, estado.Nombre_Estado, tipo.Nombre_Tipo, operatoriacomercial.Nombre_OperatoriaComercial from propiedad INNER JOIN propietario on propietario.Id_Propietario = propiedad.Id_Propietario INNER JOIN estado on estado.Id_Estado = propiedad.Id_Estado INNER JOIN tipo on tipo.Id_Tipo = propiedad.Id_Tipo INNER JOIN operatoriacomercial on operatoriacomercial.Id_OperatoriaComercial = propiedad.Id_OperatoriaComercial")
+                query.execute("SELECT propiedad.*, propietario.Nombre, estado.Nombre_Estado, tipo.Nombre_Tipo, operatoriacomercial.Nombre_OperatoriaComercial from propiedad INNER JOIN propietario on propietario.Id_Propietario = propiedad.Id_Propietario INNER JOIN estado on estado.Id_Estado = propiedad.Id_Estado INNER JOIN tipo on tipo.Id_Tipo = propiedad.Id_Tipo INNER JOIN operatoriacomercial on operatoriacomercial.Id_OperatoriaComercial = propiedad.Id_OperatoriaComercial ORDER BY Id_Propiedad")
                 result= query.fetchall()                
                 return result
             except Error as ex:
@@ -39,7 +39,7 @@ class DAO():
         if self.connection.is_connected():
             try:
                 query=self.connection.cursor()
-                query.execute("SELECT * FROM tipo")
+                query.execute("SELECT * FROM tipo ORDER BY Id_Tipo")
                 result= query.fetchall()                
                 return result
             except Error as ex:
@@ -51,7 +51,7 @@ class DAO():
         if self.connection.is_connected():
             try:
                 query=self.connection.cursor()
-                query.execute("SELECT * FROM estado")
+                query.execute("SELECT * FROM estado ORDER BY Id_Estado")
                 result= query.fetchall()                
                 return result
             except Error as ex:
@@ -75,7 +75,7 @@ class DAO():
         if self.connection.is_connected():
             try:
                 query=self.connection.cursor()
-                query.execute("SELECT * FROM operatoriacomercial")
+                query.execute("SELECT * FROM operatoriacomercial ORDER BY Id_OperatoriaComercial")
                 result= query.fetchall()                
                 return result
             except Error as ex:
@@ -99,8 +99,10 @@ class DAO():
         if self.connection.is_connected():
             try:
                 cursor = self.connection.cursor()
-                sql = "UPDATE propiedad SET Nombre = '{0}', Direccion = '{1}',Contacto = '{2}' WHERE Id_Propiedad = {3}"
-                cursor.execute(sql.format(propiedad[0], propiedad[1], propiedad[2],propiedad[3]))
+
+                sql = "UPDATE propiedad SET Id_Tipo = '{0}', Id_Estado = '{1}', Id_OperatoriaComercial = '{2}', Id_Propietario = '{3}', Nombre = '{4}', Direccion = '{5}', Contacto = '{6}' WHERE Id_Propiedad = {7}"
+                cursor.execute(sql.format(propiedad[0], propiedad[1], propiedad[2], propiedad[3], propiedad[4], propiedad[5], propiedad[6], propiedad[7]))
+
                 self.connection.commit()
                 print("CARGANDO...\n")
             except Error as ex:
@@ -114,7 +116,7 @@ class DAO():
                 cursor.execute(sql.format(Id_Propiedad))
                 self.connection.commit()
             except Error as ex:
-                print("Error al intentar la conexión: {0}".format(ex))     
+                print("Error al intentar la conexión: {0}\n".format(ex))     
 
     def listarPropiedadesDPV(self):
         if self.connection.is_connected():
@@ -129,7 +131,7 @@ class DAO():
                 result= query.fetchall()                
                 return result
             except Error as ex:
-                print("Error al intentar la conexion: {0}".format(ex))        
+                print("Error al intentar la conexion: {0}\n".format(ex))        
         else:
             print("error")
 
