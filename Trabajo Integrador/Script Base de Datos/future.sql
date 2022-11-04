@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 04-11-2022 a las 04:30:59
+-- Tiempo de generación: 04-11-2022 a las 21:12:01
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -90,18 +90,21 @@ CREATE TABLE IF NOT EXISTS `propiedad` (
   KEY `FK_Estado` (`Id_Estado`),
   KEY `FK_OperatoriaComercial` (`Id_OperatoriaComercial`),
   KEY `FK_Propietario` (`Id_Propietario`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `propiedad`
 --
 
 INSERT INTO `propiedad` (`Id_Propiedad`, `Id_Tipo`, `Id_Estado`, `Id_OperatoriaComercial`, `Id_Propietario`, `Nombre`, `Direccion`, `Contacto`) VALUES
-(6, 1, 1, 1, 1, 'casa blanca', 'colon 1112', 'Pedro'),
+(6, 1, 1, 3, 1, 'casa blanca', 'colon 1112', 'Pedro'),
 (7, 2, 2, 1, 2, 'Juan', 'Santa Rosa 715', 'Inmobiliaria Rural'),
 (8, 3, 3, 1, 3, 'Ramona', 'San Martin 13983', 'Inmobiliaria Rural'),
-(9, 2, 2, 1, 1, 'Lolo', 'Belgrano 123', 'Inmobiliaria Rural'),
-(10, 2, 1, 2, 3, 'Rafaela', 'San Martin 454', 'Inmobiliaria San Jose');
+(9, 2, 2, 2, 1, 'Lolo', 'Belgrano 123', 'Inmobiliaria Rural'),
+(10, 2, 1, 2, 3, 'Rafaela', 'San Martin 454', 'Inmobiliaria San Jose'),
+(11, 7, 2, 1, 5, 'Playa de est. centro', 'Humberto Prima 300', 'Luis'),
+(14, 4, 1, 1, 3, 'prueba modificacion', 'prueba', 'hhj'),
+(15, 3, 7, 1, 2, 'campo grande', 'san justo', 'Lucho');
 
 -- --------------------------------------------------------
 
@@ -153,10 +156,10 @@ INSERT INTO `tipo` (`Id_Tipo`, `Nombre_Tipo`) VALUES
 (4, 'Quinta'),
 (5, 'Lote'),
 (6, 'Galpon'),
-(7, 'Playa Estacionamiento'),
-(8, 'Complejo Deportivo'),
-(9, 'Canchas de Tenis'),
-(10, 'Canchas de futbol');
+(7, 'Playa Esta.'),
+(8, 'C. Deportivo'),
+(9, 'Canchas tenis'),
+(10, 'Canchas futbol');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

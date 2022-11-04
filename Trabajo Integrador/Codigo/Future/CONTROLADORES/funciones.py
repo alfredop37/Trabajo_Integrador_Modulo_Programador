@@ -1,4 +1,5 @@
 from CONTROLADORES.DBFuture import DAO
+
 dao= DAO()
 
 def listarPropiedades(propiedad):
@@ -15,6 +16,8 @@ def listarPropiedades(propiedad):
         if con == 20:
             pausa = input("\nPresione una tecla p/Continuar: ")
             con = 1
+    if con == 0:
+        print("No se encontraron propiedades ...")
 
 def listarTiposPropiedades(tipo):
     print(" ")
@@ -373,13 +376,13 @@ def pedirDatosEliminacion(propiedades):
                 cadena = "|{:>4}|{:<30}|{:<30}|{:<30}|{:<20}|{:<12}|{:<15}|{:<15}|".format(prop[0], prop[5], prop[6], prop[7], prop[8], prop[9], prop[10], prop[11])
                 print(cadena)          
                 print("")              
-                
-                
+                               
                 continua = str(input("\nConfirmar la eliminacion de la propiedad S/N ? : "))
                 if (continua =="S" or continua == "s"):   
                     return IdpropEditar
                 else:
-                    IdpropEditar = None
+                    IdpropEditar = 0
+                    return IdpropEditar
 
     except ValueError:
         continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
