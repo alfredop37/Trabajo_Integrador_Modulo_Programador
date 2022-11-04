@@ -20,15 +20,15 @@ def menuPrincipal():
             print ("***********************************************************************")
             print ("")                                                                    
             print ("- 1. Ingresar una nueva propiedad ")                                    
-            print ("- 2. Modificar datos de propiedad ")                          
-            print ("- 3. Eliminar datos de propiedad ")                      
-            print ("- 4. Listar todas las propiedades ")                         
-            print ("- 5. Listar propiedades disponibles para la Venta  ")                      
-            print ("- 6. Listar propiedades disponibles para Alquiler   ")                 
-            print ("- 7. Listar propiedades vendidas  ")                    
-            print ("- 8. Listar propiedades alquiladas ")                   
+            print ("- 2. Modificar datos de prpopiedad            ")                          
+            print ("- 3. Eliminar datos de  propiedad             ")                      
+            print ("- 4. Listar todas las propiedades              ")                         
+            print ("- 5. Listar propiedades disponibles para la venta  ")                      
+            print ("- 6. Listar propiedades disponibles para alquiler   ")                 
+            print ("- 7. Listar propiedades vendidas                    ")                    
+            print ("- 8. Listar propiedades alquiladas                   ")                   
             print (" ")                                                                    
-            print ("- 0. Salir  ")                                                           
+            print ("- 9. Salir  ")                                                           
             print (" ")                                                                 
             print ("***********************************************************************")
             
@@ -38,11 +38,11 @@ def menuPrincipal():
                 continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
                 system("cls")
                 continue
-            if opcion > 8:
+            if opcion < 1 or opcion > 9:
                 continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
                 system("cls")
                 continue
-            elif opcion == 0:
+            elif opcion == 9:
                 continuar = False
                 print("\nGracias por usar nuestro sistema!")
                 break
@@ -54,14 +54,11 @@ def ejecutarOpcion(opcion):
     dao = DAO()
     if opcion == 1:  
         try:
-            print("\n Ingresar datos de propiedad")
-            print(" ===========================")
-            oPropiedad=funciones.pedirDatosRegistro()           
-            if not oPropiedad is None:
-                dao.registrarPropiedad(oPropiedad)   
-                print("Propiedad registrada con exito...")
-                time.sleep(3)
-                menuPrincipal()
+            oPropiedad=funciones.pedirDatosRegistro()            
+            dao.registrarPropiedad(oPropiedad)   
+            print("Propiedad registrada con exito...")
+            time.sleep(3)
+            menuPrincipal()
         except error as ex:
             print("Ocurrió un error...{0}".format(ex))
 
@@ -69,8 +66,6 @@ def ejecutarOpcion(opcion):
         try:
             prop = dao.listarPropiedades()
             if len(prop) > 0:
-                print("\n Modificar datos de propiedad")
-                print("============================")
                 propi = funciones.modificarPropiedad(prop)
                 if propi:
                     dao.modificarPropiedad(propi)
@@ -79,7 +74,7 @@ def ejecutarOpcion(opcion):
                     print("")
                     menuPrincipal()
                 else:
-                    print("Propiedad a modificar no encontrada...\n")
+                    print("Propiedad a actualizar no encontrada...\n")
             else:
                 print("No se encontraron PROPIEDADES...")
         except error as ex:
@@ -89,11 +84,8 @@ def ejecutarOpcion(opcion):
         try:
             prop = dao.listarPropiedades()
             if len(prop) > 0:
-                print("\nEliminar datos de propiedad")
-                print("===========================")
                 Id_Propiedad = funciones.pedirDatosEliminacion(prop)
-                print(Id_Propiedad)
-                if ( not Id_Propiedad is None):
+                if not(Id_Propiedad == ""):
                     dao.eliminarPropiedad(Id_Propiedad)
                     print("Propiedad Eliminada con exito...")
                     time.sleep(3)
@@ -110,12 +102,9 @@ def ejecutarOpcion(opcion):
     elif opcion == 4:
         try:
             propiedad = dao.listarPropiedades()
-            if not propiedad is None:
-                print("\nListar todas las propiedades")
-                print("============================")
+            if len(propiedad) > 0:
                 funciones.listarPropiedades(propiedad)
-                pausa = input("\nPresione una tecla p/Finalizar: ")
-#                time.sleep(3)
+                time.sleep(3)
             else:
                 print("No se encontraron PROPIEDADES...")  
                 time.sleep(3)         
@@ -123,37 +112,13 @@ def ejecutarOpcion(opcion):
             print("Ocurrió un error...{0}".format(ex))
 
     elif opcion == 5:
-        try:
-            propiedad = dao.listarPropiedadesDPV()
-            if not propiedad is None:
-                print("\nPropiedades disponibles para la Venta")
-                print("=====================================")
-                funciones.listarPropiedades(propiedad)
-                pausa = input("\nPresione una tecla p/Finalizar: ")
-#                time.sleep(3)
-            else:
-                print("\nNo se encontraron PROPIEDADES para la Venta\n")  
-                time.sleep(3)         
-        except error as ex:
-            print("Ocurrió un error...{0}".format(ex))
+      
     elif opcion == 6:
-        try:
-            propiedad = dao.listarPropiedadesDPA()
-            if not propiedad is None:
-                print("\n Propiedades disponibles para el Alquiler")
-                print(" ========================================")
-                funciones.listarPropiedades(propiedad)
-                pausa = input("\nPresione una tecla p/Finalizar: ")
-#                time.sleep(3)
-            else:
-                print("\nNo se encontraron PROPIEDADES para el Alquiler\n ")  
-                time.sleep(3)         
-        except error as ex:
-            print("Ocurrió un error...{0}".format(ex))
+       
     elif opcion == 7:
-        print("opcion 7")
+         
+ 
     elif opcion == 8:
-        print("opcion 8")
       
 
 
