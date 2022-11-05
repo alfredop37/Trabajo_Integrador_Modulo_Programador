@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 04-11-2022 a las 21:12:01
+-- Tiempo de generación: 05-11-2022 a las 01:34:19
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `propiedad` (
   KEY `FK_Estado` (`Id_Estado`),
   KEY `FK_OperatoriaComercial` (`Id_OperatoriaComercial`),
   KEY `FK_Propietario` (`Id_Propietario`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `propiedad`
@@ -104,7 +104,8 @@ INSERT INTO `propiedad` (`Id_Propiedad`, `Id_Tipo`, `Id_Estado`, `Id_OperatoriaC
 (10, 2, 1, 2, 3, 'Rafaela', 'San Martin 454', 'Inmobiliaria San Jose'),
 (11, 7, 2, 1, 5, 'Playa de est. centro', 'Humberto Prima 300', 'Luis'),
 (14, 4, 1, 1, 3, 'prueba modificacion', 'prueba', 'hhj'),
-(15, 3, 7, 1, 2, 'campo grande', 'san justo', 'Lucho');
+(15, 3, 7, 1, 2, 'campo grande', 'san justo', 'Lucho'),
+(17, 2, 2, 1, 3, 'Dpto Edificio Spacial', 'Colon 3456', 'Rita');
 
 -- --------------------------------------------------------
 

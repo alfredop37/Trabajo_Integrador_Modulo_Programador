@@ -14,11 +14,13 @@ def menuPrincipal():
     while(continuar):
         opcionCorrecta = False
         while(not opcionCorrecta):
+            funciones.color_verde()
             print ("***********************************************************************")
             print ("*                       - Inmobiliaria - Future -                     *")
             print ("***********************************************************************")
             print ("*                    Sistema de Gestión Inmobiliaria                  *")
-            print ("***********************************************************************\n")                                                                 
+            print ("***********************************************************************\n")    
+            funciones.color_blanco()                                                             
             print ("- 1. Ingresar una nueva propiedad ")                                    
             print ("- 2. Modificar datos de propiedad ")                          
             print ("- 3. Eliminar datos de propiedad ")                      
@@ -27,22 +29,27 @@ def menuPrincipal():
             print ("- 6. Listar propiedades disponibles para Alquiler   ")                 
             print ("- 7. Listar propiedades vendidas  ")                    
             print ("- 8. Listar propiedades alquiladas \n")                                                                                      
-            print ("- 0. Salir  \n")                                                                                                                          
+            print ("- 0. Salir  \n")   
+            funciones.color_verde()                                                                                                                       
             print ("***********************************************************************")
-            
+            funciones.color_blanco()
             try:
                 opcion = int(input("Seleccione una opción : "))
             except ValueError:
-                continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
+                funciones.mensaje_incorrecto()
                 system("cls")
                 continue
             if opcion > 8:
-                continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
+                funciones.mensaje_incorrecto()
                 system("cls")
                 continue
             elif opcion == 0:
                 continuar = False
+                funciones.color_verde()
                 print("\nGracias por usar nuestro sistema!")
+                funciones.color_blanco()
+                dao = DAO()
+                dao.desconectar()
                 break
             else:
                 opcionCorrecta = True
@@ -57,7 +64,9 @@ def ejecutarOpcion(opcion):
             oPropiedad=funciones.pedirDatosRegistro()           
             if not oPropiedad is None:
                 dao.registrarPropiedad(oPropiedad)   
-                print("Propiedad registrada con exito...")
+                funciones.color_verde()
+                print("Propiedad registrada con exito...\n")
+                funciones.color_blanco()
                 time.sleep(3)
                 menuPrincipal()
         except error as ex:
@@ -72,7 +81,9 @@ def ejecutarOpcion(opcion):
                 propi = funciones.modificarPropiedad(prop)
                 if not propi is None:
                     dao.modificarPropiedad(propi)
+                    funciones.color_verde()
                     print("Propiedad Modificada con exito...\n")
+                    funciones.color_blanco()
                     time.sleep(3)
                     menuPrincipal()
                 else:
@@ -92,7 +103,9 @@ def ejecutarOpcion(opcion):
 
                 if ( Id_Propiedad !=0):
                     dao.eliminarPropiedad(Id_Propiedad)
-                    print("Propiedad Eliminada con exito...")
+                    funciones.color_verde()
+                    print("Propiedad Eliminada con exito...\n")
+                    funciones.color_blanco()
                     time.sleep(3)
                     print("")
                     menuPrincipal()
@@ -111,7 +124,7 @@ def ejecutarOpcion(opcion):
                 print("\nListar todas las propiedades")
                 print("============================")
                 funciones.listarPropiedades(propiedad)
-                pausa = input("\nPresione una tecla p/Finalizar: ")
+                funciones.pausa()
 #                time.sleep(3)
             else:
                 print("No se encontraron PROPIEDADES...")  
@@ -126,7 +139,7 @@ def ejecutarOpcion(opcion):
                 print("\nPropiedades disponibles para la Venta")
                 print("=====================================")
                 funciones.listarPropiedades(propiedad)
-                pausa = input("\nPresione una tecla p/Finalizar: ")
+                funciones.pausa()
 #                time.sleep(3)
             else:
                 print("\nNo se encontraron PROPIEDADES para la Venta\n")  
@@ -140,7 +153,7 @@ def ejecutarOpcion(opcion):
                 print("\n Propiedades disponibles para el Alquiler")
                 print(" ========================================")
                 funciones.listarPropiedades(propiedad)
-                pausa = input("\nPresione una tecla p/Finalizar: ")
+                funciones.pausa()
 #                time.sleep(3)
             else:
                 print("\nNo se encontraron PROPIEDADES para el Alquiler\n ")  
@@ -154,7 +167,7 @@ def ejecutarOpcion(opcion):
                 print("\nPropiedades Vendidas")
                 print("====================\n")
                 funciones.listarPropiedades(propiedad)
-                pausa = input("\nPresione una tecla p/Finalizar: ")
+                funciones.pausa()
             else:
                 print("\nNo se encontraron PROPIEDADES vendidas\n ")  
                 time.sleep(3)         
@@ -167,7 +180,7 @@ def ejecutarOpcion(opcion):
                 print("\nPropiedades Alquiladas")
                 print("======================\n")
                 funciones.listarPropiedades(propiedad)
-                pausa = input("\nPresione una tecla p/Finalizar: ")
+                funciones.pausa()
             else:
                 print("\nNo se encontraron PROPIEDADES vendidas\n ")  
                 time.sleep(3)         
