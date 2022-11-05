@@ -1,0 +1,40 @@
+class Propiedad:
+
+
+    Nombre = ""
+    Direccion = ""
+    Contacto = ""
+
+    def __init__(self, Nombre, Direccion, Contacto):
+        self.Nombre = Nombre,
+        self.Direccion = Direccion,
+        self.Contacto = Contacto
+
+    def get_Nombre(self):
+        return self.Nombre
+
+
+    def set_Nombre(self, Nombre):
+        self.Nombre = Nombre
+
+
+    def get_Direccion(self):
+        return self.Direccion
+
+
+    def set_Direccion(self, Direccion):
+        self.Direccion = Direccion
+
+
+    def get_Contacto(self):
+        return self.Contacto
+
+
+    def set_Contacto(self, Contacto):
+        self.Contacto = Contacto
+        
+
+    def _str(self):
+        print('Nombre'+self.Propiedad)
+        print('Direccion'+self.Propiedad)
+        print('Contacto'+self.Propiedad)
