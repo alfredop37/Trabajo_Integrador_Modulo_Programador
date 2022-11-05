@@ -1,17 +1,20 @@
 from CONTROLADORES.DBFuture import DAO
+from colorama import  init, Fore, Back, Style
 
 dao= DAO()
 
 def listarPropiedades(propiedad):
-    print("+----+------------------------------+------------------------------+------------------------------+--------------------+------------+---------------+---------------+")    
-    print("| Id.| Propiedad                    | Direccion                    | Contacto                     | Propietario        | Estado     | Tipo Propiedad| Operatoria    |")  
-    print("+----+------------------------------+------------------------------+------------------------------+--------------------+------------+---------------+------------.--+")
+    print("+----+------------------------------+------------------------------+------------------------------+-------------------------+------------+--------------------+---------------+")    
+    color_verde()
+    print("| Id.| Propiedad                    | Direccion                    | Contacto                     | Propietario             | Estado     | Tipo Propiedad     | Operatoria    |")  
+    color_blanco()
+    print("+----+------------------------------+------------------------------+------------------------------+-------------------------+------------+--------------------+---------------+")   
     con = 0
     for prop in propiedad:
         
-        cadena = "|{:>4}|{:<30}|{:<30}|{:<30}|{:<20}|{:<12}|{:<15}|{:<15}|".format(prop[0], prop[5], prop[6], prop[7], prop[8], prop[9], prop[10], prop[11])
+        cadena = "|{:>4}|{:<30}|{:<30}|{:<30}|{:<25}|{:<12}|{:<20}|{:<15}|".format(prop[0], prop[5], prop[6], prop[7], prop[8], prop[9], prop[10], prop[11])
         print(cadena)
-        print("+----+------------------------------+------------------------------+------------------------------+--------------------+------------+---------------+-------.-------+")
+        print("+----+------------------------------+------------------------------+------------------------------+-------------------------+------------+--------------------+---------------+")
         con = con + 1
         if con == 20:
             pausa = input("\nPresione una tecla p/Continuar: ")
@@ -87,11 +90,13 @@ def pedirDatosRegistro():
                         break
 
             if(tipoCorrecto == False):
+                color_rojo()
                 continua = input('\nTipo Ingresado Incorrecto... Presione una tecla p/continuar...')
+                color_blanco
                 continue
                 
         except ValueError:
-            continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...')
+            mensaje_incorrecto()
             continue 
 
     if (continuar):      
@@ -111,12 +116,14 @@ def pedirDatosRegistro():
                         break
 
                 if(conDatos==False):
+                    color_rojo()
                     continua = input('\nEstado Ingresado Incorrecto... Presione una tecla p/continuar...\n')
+                    color_blanco()
                     continue
                 else:
                     estadossCorrecto = True
             except ValueError:
-                continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
+                mensaje_incorrecto()
                 continue    
 
         operatoriaCorrecto = False
@@ -134,12 +141,14 @@ def pedirDatosRegistro():
                         break
                 
                 if (conDatos==False):
+                    color_rojo()
                     continua = input('\nOperatoria Ingresada Incorrecta... Presione una tecla p/continuar...\n')
+                    color_blanco()
                     continue
                 else:
                     operatoriaCorrecto = True
             except ValueError:
-                continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
+                mensaje_incorrecto()
                 continue          
 
         propietariosCorrecto = False
@@ -156,12 +165,14 @@ def pedirDatosRegistro():
                         break
 
                 if (conDatos==False):
+                    color_rojo()
                     continua = input('\nPropietario Ingresado Incorrecto... Presione una tecla p/continuar...\n')
+                    color_blanco()
                     continue
                 else:
                     propietariosCorrecto = True
             except ValueError:
-                continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
+                mensaje_incorrecto()
                 continue      
 
         nombreCorrecto = False
@@ -220,12 +231,15 @@ def modificarPropiedad(propiedades):
                 continua = input('\nId Propiedad inexistente... Presione una tecla p/continuar...\n')
                 continue 
             else:
-                cadena = "|{:>4}|{:<30}|{:<30}|{:<30}|{:<20}|{:<12}|{:<15}|{:<15}|".format(prop[0], prop[5], prop[6], prop[7], prop[8], prop[9], prop[10], prop[11])
+                color_amarillo()
+                print("\n+----+------------------------------+------------------------------+------------------------------+-------------------------+------------+--------------------+---------------+")
+                cadena = "|{:>4}|{:<30}|{:<30}|{:<30}|{:<25}|{:<12}|{:<20}|{:<15}|".format(prop[0], prop[5], prop[6], prop[7], prop[8], prop[9], prop[10], prop[11])
                 print(cadena)           
-                print("")            
+                print("+----+------------------------------+------------------------------+------------------------------+-------------------------+------------+--------------------+---------------+\n")          
+                color_blanco()
                 nombreCorrecto = False
                 while(not nombreCorrecto):       
-                    nombre = str(input("Ingrese Nombre de la propiedad a modificar: "))   
+                    nombre = str(input("Ingrese Nombre de la propiedad a editar : "))   
                     if(nombre==""):
                         continua = input("\nDebe ingresar un nombre para la propiedad.\n")
                         continue
@@ -264,13 +278,15 @@ def modificarPropiedad(propiedades):
                                 break
 
                         if(conDatos == False):
+                            color_rojo()
                             continua = input('\nTipo Ingresado Incorrecto... Presione una tecla p/continuar...')
+                            color_blanco()
                             continue
                         else:
                             tipoCorrecto = True
                             
                     except ValueError:
-                        continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...')
+                        mensaje_incorrecto()
                         continue   
 
                 estadossCorrecto = False
@@ -288,12 +304,14 @@ def modificarPropiedad(propiedades):
                                 break
 
                         if(conDatos==False):
+                            color_rojo()
                             continua = input('\nEstado Ingresado Incorrecto... Presione una tecla p/continuar...\n')
+                            color_blanco()
                             continue
                         else:
                             estadossCorrecto = True
                     except ValueError:
-                        continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
+                        mensaje_incorrecto()
                         continue     
 
                 operatoriaCorrecto = False
@@ -311,12 +329,14 @@ def modificarPropiedad(propiedades):
                                 break
                         
                         if (conDatos==False):
+                            color_rojo()
                             continua = input('\nOperatoria Ingresada Incorrecta... Presione una tecla p/continuar...\n')
+                            color_blanco()
                             continue
                         else:
                             operatoriaCorrecto = True
                     except ValueError:
-                        continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
+                        mensaje_incorrecto()
                         continue          
 
                 propietariosCorrecto = False
@@ -334,12 +354,14 @@ def modificarPropiedad(propiedades):
                                 break
 
                         if (conDatos==False):
+                            color_rojo()
                             continua = input('\nPropietario Ingresado Incorrecto... Presione una tecla p/continuar...\n')
+                            color_blanco()
                             continue
                         else:
                             propietariosCorrecto = True
                     except ValueError:
-                        continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
+                        mensaje_incorrecto()
                         continue       
                 
                 propiedad = None
@@ -351,7 +373,7 @@ def modificarPropiedad(propiedades):
 
     except ValueError:
         propiedad = None
-        continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n') 
+        mensaje_incorrecto()
 
 def pedirDatosEliminacion(propiedades):
     propiedad=listarPropiedades(propiedades)
@@ -370,12 +392,17 @@ def pedirDatosEliminacion(propiedades):
 
             if existeIdprop == False:
                 IdpropEditar =0
+                color_rojo()
                 continua = input('\nId Propiedad inexistente... Presione una tecla p/continuar...\n')
+                color_blanco()
                 continue
             else:        
-                cadena = "|{:>4}|{:<30}|{:<30}|{:<30}|{:<20}|{:<12}|{:<15}|{:<15}|".format(prop[0], prop[5], prop[6], prop[7], prop[8], prop[9], prop[10], prop[11])
-                print(cadena)          
-                print("")              
+                color_amarillo()
+                print("\n+----+------------------------------+------------------------------+------------------------------+-------------------------+------------+--------------------+---------------+")
+                cadena = "|{:>4}|{:<30}|{:<30}|{:<30}|{:<25}|{:<12}|{:<20}|{:<15}|".format(prop[0], prop[5], prop[6], prop[7], prop[8], prop[9], prop[10], prop[11])
+                print(cadena)           
+                print("+----+------------------------------+------------------------------+------------------------------+-------------------------+------------+--------------------+---------------+\n")          
+                color_blanco()             
                                
                 continua = str(input("\nConfirmar la eliminacion de la propiedad S/N ? : "))
                 if (continua =="S" or continua == "s"):   
@@ -385,7 +412,50 @@ def pedirDatosEliminacion(propiedades):
                     return IdpropEditar
 
     except ValueError:
-        continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n')
-        
- 
+        mensaje_incorrecto()
+
+def color_blanco():
+    try:
+        init()
+        print(Fore.WHITE,end="")
+    except  (ValueError) as e:
+            print("Ocurrió un error cargar el color BLANCO ", e)
+    return
+
+def color_verde():
+    try:
+        init()
+        print(Fore.GREEN,end="")
+    except  (ValueError) as e:
+            print("Ocurrió un error cargar el color VERDE ", e)
+    return
+
+def color_rojo():
+    try:
+        init()
+        print(Fore.RED,end="")
+    except  (ValueError) as e:
+            print("Ocurrió un error cargar el color ROJO ", e)
+    return
+
+def color_amarillo():
+    try:
+        init()
+        print(Fore.YELLOW,end="")
+    except  (ValueError) as e:
+            print("Ocurrió un error cargar el color AMARILLO ", e)
+    return
+
+def mensaje_incorrecto():
+    try:
+        color_rojo()
+        continua = input('\nOpcion incorrecta... Presione una tecla p/continuar...\n') 
+        color_blanco()
+    except  (ValueError) as e:
+            print("Ocurrió un error cargar el color ROJO ", e)
+    return
+
+def pausa():
+    pausa = input("\nPresione una tecla p/Finalizar: ")
+
 

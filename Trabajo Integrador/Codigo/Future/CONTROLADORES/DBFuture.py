@@ -5,6 +5,7 @@
 from distutils.log import error
 import mysql.connector
 from mysql.connector import Error
+import time
 
 #from CLASES.Propietario import Propietario
 
@@ -20,6 +21,18 @@ class DAO():
             )            
         except Error as ex:
             print("Error al intentar la conexion: {0}".format(ex))
+    
+    #Desconectar BBDD   
+    def desconectar(self):          
+        try:
+            if self.connection.is_connected():
+                self.connection.close()
+                print('Conexión cerrada ' +
+                      time.strftime("%x") + 
+                      '  ' + time.strftime("%X"))
+        except mysql.connector.Error as err:
+            print('Error al conectar a la Base de Datos')
+            print(err)
 
     def listarPropiedades(self):
         if self.connection.is_connected():
